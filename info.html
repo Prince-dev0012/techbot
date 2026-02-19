@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechXplore - Information</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="glass">
+        <div class="container">
+            <nav>
+                <div class="logo">TechXplore</div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="events.html">Events</a></li>
+                    <li><a href="info.html" class="active">Info</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="BolAI/index.html">Ask AI</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-header container">
+        <h1>Essential <span style="color: var(--accent-color);">Information</span></h1>
+        <p>Everything you need to know about the venue and logistics.</p>
+    </section>
+
+    <section class="container" style="margin-bottom: 4rem;">
+        <div class="info-grid">
+            <div class="info-card glass">
+                <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                <h3>Venue</h3>
+                <p>Tech Institute of Technology<br>123 Innovation Drive, Tech City</p>
+            </div>
+            <div class="info-card glass">
+                <div class="info-icon"><i class="fas fa-bus"></i></div>
+                <h3>Transport</h3>
+                <p>Shuttle buses available from City Center every 30 minutes.</p>
+            </div>
+            <div class="info-card glass">
+                <div class="info-icon"><i class="fas fa-bed"></i></div>
+                <h3>Accommodation</h3>
+                <p>On-campus hostels available for participants. Contact us to book.</p>
+            </div>
+        </div>
+
+        <div class="glass" style="padding: 1rem; border-radius: 10px; overflow: hidden; margin-bottom: 4rem;">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3506.123456789012!2d77.12345678901234!3d28.12345678901234!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjjCsDA3JzI0LjQiTiA3N8KwMDcnMjQuNCJF!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+
+        <!-- Resources Section -->
+        <h2 style="margin-bottom: 2rem;">Downloads & Resources</h2>
+        <div id="resources-grid" class="info-grid">
+            <!-- Resources loaded via JS -->
+        </div>
+
+        <!-- Gallery Section -->
+        <h2 style="margin-bottom: 2rem; margin-top: 4rem;">Gallery</h2>
+        <div id="gallery-grid" class="info-grid" style="grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));">
+            <!-- Images loaded via JS -->
+        </div>
+    </section>
+
+    <!-- Floating AI Button -->
+    <a href="BolAI/index.html" class="floating-ai-btn" title="Ask AI Assistant">
+        <i class="fas fa-robot"></i>
+    </a>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div>
+                <h3>TechXplore</h3>
+                <p>Innovate. Create. Inspire.</p>
+            </div>
+            <div>
+                <h4>Quick Links</h4>
+                <ul style="margin-top: 1rem;">
+                    <li><a href="events.html">Events</a></li>
+                    <li><a href="info.html">Info</a></li>
+                    <li><a href="about.html">Team</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Contact</h4>
+                <p>contact@techxplore.edu</p>
+                <div class="social-icons" style="margin-top: 1rem;">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center; padding-top: 2rem; color: var(--text-secondary); font-size: 0.8rem;">
+            &copy; 2024 TechXplore. All rights reserved. | Powered by TechXplore
+        </div>
+    </footer>
+
+    <script type="module" src="assets/js/main.js"></script>
+    <script type="module" src="assets/js/info.js"></script>
+</body>
+</html>

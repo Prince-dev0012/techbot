@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechXplore - Admin Panel</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        .admin-container {
+            padding: 100px 2rem 5rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .admin-section {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            border: 1px solid var(--glass-border);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--accent-color);
+        }
+        
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(2, 12, 27, 0.5);
+            border: 1px solid var(--glass-border);
+            color: var(--text-primary);
+            border-radius: 5px;
+            font-family: var(--font-main);
+        }
+        
+        .form-group textarea {
+            height: 100px;
+            resize: vertical;
+        }
+        
+        .status-msg {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 5px;
+            display: none;
+        }
+        
+        .status-success {
+            background: rgba(100, 255, 218, 0.1);
+            color: var(--accent-color);
+            border: 1px solid var(--accent-color);
+        }
+        
+        .status-error {
+            background: rgba(255, 100, 100, 0.1);
+            color: #ff6464;
+            border: 1px solid #ff6464;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="glass">
+        <div class="container">
+            <nav>
+                <div class="logo">TechXplore Admin</div>
+                
+                <ul class="nav-links">
+                    <li><a href="index.html">View Site</a></li>
+                    <li><a href="#" class="active">Dashboard</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="admin-container">
+        <h1>Admin Dashboard</h1>
+        <p style="margin-bottom: 2rem; color: var(--text-secondary);">Manage events and notifications.</p>
+
+        <!-- Add Event Section -->
+        <div class="admin-section glass">
+            <h2><i class="fas fa-calendar-plus"></i> Add New Event</h2>
+            <form id="add-event-form">
+                <div class="form-group">
+                    <label>Event Title</label>
+                    <input type="text" id="event-title" required>
+                </div>
+                
+                <div class="form-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div>
+                        <label>Date</label>
+                        <input type="date" id="event-date" required>
+                    </div>
+                    <div>
+                        <label>Time</label>
+                        <input type="time" id="event-time">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Venue</label>
+                    <input type="text" id="event-venue" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Registration Fees (Enter 'Free' or Amount)</label>
+                    <input type="text" id="event-fees" placeholder="e.g. Free, $10, ₹500" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Category</label>
+                    <select id="event-category">
+                        <option value="Technical">Technical</option>
+                        <option value="Non-Technical">Non-Technical</option>
+                        <option value="Workshop">Workshop</option>
+                        <option value="Seminar">Seminar</option>
+                        <option value="Gaming">Gaming</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Image URL</label>
+                    <input type="url" id="event-image" placeholder="https://example.com/image.jpg">
+                </div>
+
+                <div class="form-group">
+                    <label>Short Description (for card)</label>
+                    <textarea id="event-short-desc" style="height: 60px;" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Full Description (Markdown supported)</label>
+                    <textarea id="event-desc" required></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary" id="publish-event-btn">Publish Event</button>
+                <button type="button" class="btn" id="cancel-edit-btn" style="display: none; margin-left: 10px; border: 1px solid var(--text-secondary); color: var(--text-secondary);">Cancel Edit</button>
+                <div id="event-status" class="status-msg"></div>
+            </form>
+        </div>
+
+        <!-- Manage Events Section -->
+        <div class="admin-section glass">
+            <h2><i class="fas fa-list"></i> Manage Events</h2>
+            <div id="manage-events-list" style="display: grid; gap: 1rem; max-height: 400px; overflow-y: auto;">
+                <!-- Events loaded via JS -->
+            </div>
+        </div>
+
+        <!-- Add Notification Section -->
+        <div class="admin-section glass">
+            <h2><i class="fas fa-bell"></i> Send Notification</h2>
+            <form id="add-notification-form">
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" id="notif-title" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Message</label>
+                    <textarea id="notif-message" rows="3" required></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary" id="send-notif-btn">Send Notification</button>
+                <button type="button" class="btn" id="cancel-notif-edit-btn" style="display: none; margin-left: 10px; border: 1px solid var(--text-secondary); color: var(--text-secondary);">Cancel Edit</button>
+                <div id="notif-status" class="status-msg"></div>
+            </form>
+        </div>
+
+        <!-- Manage Notifications Section -->
+        <div class="admin-section glass">
+            <h2><i class="fas fa-edit"></i> Manage Notifications</h2>
+            <div id="manage-notifications-list" style="display: grid; gap: 1rem; max-height: 400px; overflow-y: auto;">
+                <!-- Notifications loaded via JS -->
+            </div>
+        </div>
+
+        <!-- Add Resource Section -->
+        <div class="admin-section glass">
+            <h2><i class="fas fa-file-upload"></i> Upload Resource</h2>
+            <form id="add-resource-form">
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" id="resource-title" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="resource-desc" rows="2"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>File (Max 500KB)</label>
+                    <input type="file" id="resource-file" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary" id="upload-resource-btn">Upload Resource</button>
+                <button type="button" class="btn" id="cancel-resource-edit-btn" style="display: none; margin-left: 10px; border: 1px solid var(--text-secondary); color: var(--text-secondary);">Cancel Edit</button>
+                <div id="resource-status" class="status-msg"></div>
+            </form>
+        </div>
+
+        <!-- Manage Resources Section -->
+        <div class="admin-section glass">
+            <h2><i class="fas fa-tasks"></i> Manage Resources</h2>
+            <div id="manage-resources-list" style="display: grid; gap: 1rem; max-height: 400px; overflow-y: auto;">
+                <!-- Resources loaded via JS -->
+            </div>
+        </div>
+
+        <!-- Gallery Upload Section -->
+        <div class="admin-section glass">
+            <h2><i class="fas fa-images"></i> Add to Gallery</h2>
+            <form id="add-gallery-form">
+                <div class="form-group">
+                    <label>Title/Caption</label>
+                    <input type="text" id="gallery-title" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Image (Max 500KB)</label>
+                    <input type="file" id="gallery-file" accept="image/*" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary" id="upload-gallery-btn">Upload Image</button>
+                <button type="button" class="btn" id="cancel-gallery-edit-btn" style="display: none; margin-left: 10px; border: 1px solid var(--text-secondary); color: var(--text-secondary);">Cancel Edit</button>
+                <div id="gallery-status" class="status-msg"></div>
+            </form>
+        </div>
+
+        <!-- Manage Gallery Section -->
+        <div class="admin-section glass">
+            <h2><i class="fas fa-photo-video"></i> Manage Gallery</h2>
+            <div id="manage-gallery-list" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 1rem; max-height: 400px; overflow-y: auto;">
+                <!-- Gallery images loaded via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="assets/js/admin.js"></script>
+</body>
+</html>

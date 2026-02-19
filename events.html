@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechXplore - Events</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="glass">
+        <div class="container">
+            <nav>
+                <div class="logo">TechXplore</div>
+                
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="events.html" class="active">Events</a></li>
+                    <li><a href="info.html">Info</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="BolAI/index.html">Ask AI</a></li>
+                </ul>
+
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header container">
+        <h1>Explore Our <span style="color: var(--accent-color);">Events</span></h1>
+        <p>Discover workshops, competitions, and seminars designed to challenge and inspire.</p>
+    </section>
+
+    <!-- Filters & Search -->
+    <section class="container">
+        <div class="search-bar">
+            <input type="text" id="event-search" placeholder="Search events...">
+        </div>
+        
+        <div class="filters-section">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="Technical">Technical</button>
+            <button class="filter-btn" data-filter="Non-Technical">Non-Technical</button>
+            <button class="filter-btn" data-filter="Workshop">Workshops</button>
+            <button class="filter-btn" data-filter="Seminar">Seminars</button>
+        </div>
+    </section>
+
+    <!-- Events Grid -->
+    <section class="container">
+        <div id="events-grid" class="events-grid">
+            <!-- Events will be loaded here via JS -->
+            <!-- Fallback / Loading State -->
+            <div style="grid-column: 1/-1; text-align: center; padding: 2rem;">
+                <i class="fas fa-spinner fa-spin" style="font-size: 2rem; color: var(--accent-color);"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Event Details Modal -->
+    <div id="event-modal" class="modal">
+        <div class="modal-content glass">
+            <span class="close-modal">&times;</span>
+            <div id="modal-image" class="modal-banner" style="background-image: url('https://via.placeholder.com/800');"></div>
+            <div class="modal-body">
+                <h2 id="modal-title">Event Title</h2>
+                <div class="event-meta" style="margin-bottom: 1rem;">
+                    <span style="margin-right: 1rem;"><i class="far fa-calendar"></i> <span id="modal-date">Date</span></span>
+                    <span><i class="fas fa-map-marker-alt"></i> <span id="modal-venue">Venue</span></span>
+                </div>
+                <div id="modal-desc" style="line-height: 1.8; color: var(--text-secondary); margin-bottom: 2rem;">
+                    Event description goes here...
+                </div>
+                <button id="modal-register-btn" class="btn btn-primary">Register Now</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating AI Button -->
+    <a href="BolAI/index.html" class="floating-ai-btn" title="Ask AI Assistant">
+        <i class="fas fa-robot"></i>
+    </a>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div>
+                <h3>TechXplore</h3>
+                <p>Innovate. Create. Inspire.</p>
+            </div>
+            <div>
+                <h4>Quick Links</h4>
+                <ul style="margin-top: 1rem;">
+                    <li><a href="events.html">Events</a></li>
+                    <li><a href="info.html">Info</a></li>
+                    <li><a href="about.html">Team</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Contact</h4>
+                <p>contact@techxplore.edu</p>
+                <div class="social-icons" style="margin-top: 1rem;">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center; padding-top: 2rem; color: var(--text-secondary); font-size: 0.8rem;">
+            &copy; 2024 TechXplore. All rights reserved. | Powered by TechXplore
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script type="module" src="assets/js/main.js"></script>
+    <script type="module" src="assets/js/events.js"></script>
+</body>
+</html>

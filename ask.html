@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechBot - AI Assistant</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/chat.css">
+    
+    <!-- Markdown Library -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body style="overflow: hidden;">
+
+    <!-- Header -->
+    <header class="glass" style="position: absolute; width: 100%; top: 0; z-index: 1000;">
+        <div class="container">
+            <nav>
+                <div class="logo">TechBot <span style="font-size: 0.8rem; color: var(--accent-color);">Beta</span></div>
+                
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="events.html">Events</a></li>
+                    <li><a href="ask.html" class="active">Ask AI</a></li>
+                </ul>
+
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="chat-container">
+        <!-- Sidebar -->
+        <aside class="chat-sidebar" id="chat-sidebar">
+            <div class="sidebar-header">
+                <button id="new-chat-btn" class="new-chat-btn">
+                    <i class="fas fa-plus"></i> New Chat
+                </button>
+            </div>
+            <div class="chat-history" id="chat-history">
+                <!-- History items loaded via JS -->
+            </div>
+            <div class="sidebar-footer" style="padding: 1rem; border-top: 1px solid var(--glass-border);">
+                <button id="clear-chats-btn" style="background: transparent; border: none; color: #ff6464; cursor: pointer; font-size: 0.9rem;">
+                    <i class="fas fa-trash-alt"></i> Clear History
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Chat -->
+        <main class="chat-main">
+            <div class="sidebar-toggle" id="sidebar-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            
+            <div class="settings-btn" id="open-settings">
+                <i class="fas fa-cog"></i>
+            </div>
+
+            <div class="chat-messages" id="chat-messages">
+                <div class="message assistant">
+                    <div class="message-content">
+                        <p>Hello! I'm TechBot, your AI assistant for TechXplore. How can I help you today?</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chat-input-area">
+                <div class="chat-input-wrapper">
+                    <input type="text" id="user-input" class="chat-input" placeholder="Type your message..." autocomplete="off">
+                </div>
+                <button id="send-btn" class="send-btn">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="modal">
+        <div class="modal-content glass" style="max-width: 500px;">
+            <span class="close-modal" id="close-settings">&times;</span>
+            <h2 style="margin-bottom: 1.5rem;">Chat Settings</h2>
+            
+            <div class="form-group" style="margin-bottom: 1.5rem;">
+                <label style="display: block; margin-bottom: 0.5rem; color: var(--accent-color);">API Key (OpenRouter)</label>
+                <input type="password" id="api-key" placeholder="sk-or-..." style="width: 100%; padding: 0.8rem; background: rgba(2, 12, 27, 0.5); border: 1px solid var(--glass-border); color: var(--text-primary); border-radius: 5px;">
+                <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.5rem;">Leave empty to use default key (if configured).</p>
+            </div>
+            
+            <div class="form-group" style="margin-bottom: 1.5rem;">
+                <label style="display: block; margin-bottom: 0.5rem; color: var(--accent-color);">System Prompt</label>
+                <textarea id="system-prompt" style="width: 100%; height: 100px; padding: 0.8rem; background: rgba(2, 12, 27, 0.5); border: 1px solid var(--glass-border); color: var(--text-primary); border-radius: 5px;">You are TechBot, a helpful AI assistant for the TechXplore website.</textarea>
+            </div>
+            
+            <button id="save-settings" class="btn btn-primary" style="width: 100%;">Save Settings</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="assets/js/main.js"></script>
+    <script type="module" src="assets/js/ask.js"></script>
+</body>
+</html>
