@@ -1,0 +1,136 @@
+# Master Prompt: BolAI Project Generation
+
+You are an expert Full-Stack Developer specializing in AI applications and Firebase. Your task is to build a complete, production-ready AI Chatbot application called **"BolAI"** from scratch. This app allows users to chat with an AI (via OpenRouter/OpenAI API) and optionally use a custom Knowledge Base (RAG-lite) with strict source citations.
+
+## Tech Stack & Architecture
+- **Frontend**: Vanilla HTML5, CSS3, JavaScript (ES6+ modules).
+- **Backend/Database**: Firebase Authentication (Email/Password + Google), Firestore (NoSQL).
+- **AI Integration**: OpenRouter API (OpenAI-compatible endpoint).
+- **Libraries**: `marked.js` (for Markdown rendering), `pdf.js` (for PDF parsing), `xlsx` (SheetJS for Excel/CSV parsing).
+- **Hosting**: Static hosting (e.g., Firebase Hosting or Vercel).
+
+---
+
+## 1. Project Structure
+Create the following file structure:
+- `index.html` (Login/Signup page)
+- `chatbot.html` (Main Chat Interface)
+- `style.css` (Global styles & Auth page styling)
+- `chat.css` (Chat interface specific styling)
+- `loader.css` (Startup animation styling)
+- `firestore.js` (Firebase configuration & helper functions)
+- `chat.js` (Main chat logic)
+- `settings.js` (Settings modal logic)
+
+---
+
+## 2. Detailed Requirements
+
+### A. Authentication Flow (`index.html`)
+1.  **Loader Animation**: On load, show a full-screen overlay (`#loader`) with the text "BolAI" where each letter animates in sequence. Check auth state in background.
+2.  **Login Card**:
+    -   Email & Password fields.
+    -   "Log In" button.
+    -   "Continue with Google" button (with Google logo SVG). **Behavior**: STRICT LOGIN ONLY. If the user does not have an account, prevent login, delete the temporary credential, and show an error: "Account does not exist. Please sign up first."
+    -   "Forgot Password?" link.
+3.  **Signup Card**: Toggle visibility with Login card. Email/Password registration.
+    -   "Sign up with Google" button. **Behavior**: Create account and log in. If account exists, just log in.
+4.  **Logic**: Use Firebase Auth. Redirect to `chatbot.html` on success. Handle errors (show red error text).
+
+### B. Main Chat Interface (`chatbot.html`)
+Layout must be a responsive sidebar + main chat area.
+1.  **Sidebar**:
+    -   **Top**: "New Chat" button (Primary action).
+    -   **Middle**: Scrollable list of past chats (`#chat-history-list`). Active chat gets `.active` class.
+    -   **Bottom**: User Profile (Avatar + Email) and controls (Settings Icon, Logout Icon).
+    -   **Mobile**: Collapsible via hamburger menu.
+2.  **Main Area**:
+    -   **Welcome Screen**: Show ONLY when chat has 0 messages.
+        -   Center content: "BolAI" Logo + Greeting "How can I help you today?".
+        -   Dynamic Source: If a Knowledge Base is set in settings, add a sub-element: "Ready to answer from **[Source Name]**".
+    -   **Messages Container**:
+        -   Scrollable (`overflow-y: auto`).
+        -   **Important**: Content should be centered with dynamic padding (max-width ~900px).
+    -   **Input Area**:
+        -   Sticky at bottom.
+        -   Textarea (auto-expanding) + Send Button + Stop Button (visible only when generating).
+        -   Disclaimer footer: "BolAI can make mistakes...".
+
+### C. Chat Logic & AI Integration (`chat.js`)
+1.  **Message Rendering**:
+    -   **User**: Right-aligned, Blue background. **Crucial Style**: Compact padding (`6px 14px`), tight line-height (`1.4`), font-size (`0.95rem`).
+    -   **AI**: Left-aligned, Transparent/Dark background.
+        -   **Markdown**: Parse content using `marked.js`.
+        -   **Code Blocks**: Wrap in dark container with language label + Copy button.
+    -   **Streaming**: Implement a "Typewriter Effect" for incoming AI responses (simulate streaming if API doesn't support it, or handle real streams).
+    -   **Auto-Scroll**: Scroll to bottom when new content is added.
+
+2.  **Source Detection Feature (CRITICAL)**:
+    -   **Concept**: The AI can "cite" a source.
+    -   **Protocol**: If the AI uses the provided Knowledge Base, it MUST prepend `[SOURCE_USED]` to its response.
+    -   **Frontend Logic**:
+        -   Detect `[SOURCE_USED]` string in response.
+        -   If found: Remove the string from the visible text.
+        -   Add a visual **"Source Context Used"** badge (light blue pill) at the top of the AI message bubble.
+        -   Style the message background slightly differently (e.g., light blue tint) to indicate source usage.
+
+3.  **Copy Button**:
+    -   Every AI message must have a small "Copy" button at the bottom.
+    -   **Style**: Icon-only (SVG clipboard). On click, change icon to checkmark for 2s.
+
+### D. Settings & Configuration (`settings.js`)
+Create a modal with the following tabs/sections:
+1.  **API Configuration**:
+    -   API Key (stored in Firestore `users/{uid}/settings`).
+    -   API URL (default: `https://openrouter.ai/api/v1/chat/completions`).
+    -   Model ID (default: `openai/gpt-3.5-turbo`).
+2.  **Knowledge Base (RAG-lite)**:
+    -   **Source Text**: A large textarea to paste context/documents.
+    -   **File Upload**:
+        -   Allow users to upload files: `.pdf`, `.txt`, `.csv`, `.xlsx`.
+        -   **Processing**:
+            -   Use `pdf.js` (via CDN) to extract text from PDFs.
+            -   Use `xlsx` (SheetJS via CDN) to extract text from Excel/CSV files.
+            -   Read text directly from `.txt` files.
+            -   **Action**: Extracted text should be automatically appended to the "Source Text" textarea. This ensures the content is stored in the Firestore database along with the manually pasted text.
+    -   **Source Name**: Label for the source (e.g., "Company Policy").
+3.  **Response Modes (Toggles)**:
+    -   **Strict Source Mode**:
+        -   *Logic*: If ON, system prompt instructs AI to **ONLY** answer from the Knowledge Base. If answer not found, reply "I cannot find the answer...".
+    -   **Online Search & Fallback**:
+        -   *Logic*: If ON (and Strict is OFF), instructions are: "First check Knowledge Base. If found, use `[SOURCE_USED]`. If NOT found, search online/general knowledge (but DO NOT use `[SOURCE_USED]` tag)."
+        -   *Dependency*: Disable this toggle if Strict Mode is ON.
+
+### E. Styling & Theme (`chat.css`)
+-   **Theme**: Clean, modern, dark/light mode compatible (default to a soft dark theme or neutral light).
+-   **Variables**:
+    -   `--user-msg-bg`: `#2563eb` (Blue).
+    -   `--ai-msg-bg`: `transparent` or `#f3f4f6`.
+    -   `--sidebar-bg`: `#f9fafb`.
+    -   `--accent-color`: `#3b82f6`.
+
+---
+
+## 3. Implementation Steps for the AI Agent
+1.  **Setup**: Initialize Firebase app.
+2.  **Auth**: Build `index.html` and handle login/signup flows.
+3.  **Layout**: Build `chatbot.html` skeleton and CSS.
+4.  **Logic**: Implement `chat.js` to handle message sending, API calls, and Markdown rendering.
+5.  **Feature - Source Detection**: Implement the regex logic to catch `[SOURCE_USED]` and render the badge.
+6.  **Feature - Settings**: Build the settings modal and wire up Firestore saving/loading.
+7.  **Refinement**: Polish the CSS (especially the user message bubble compactness) and ensure the "Welcome Screen" logic works correctly (hidden when messages exist).
+
+## 4. Firebase Configuration
+Use the following configuration for the Firebase initialization:
+```javascript
+const firebaseConfig = {
+    apiKey: "AIzaSyDbQ6ov5yTrDpTh4p9qoUi4XfJkl7Nf740",
+    authDomain: "bolai-app-9284.firebaseapp.com",
+    projectId: "bolai-app-9284",
+    storageBucket: "bolai-app-9284.firebasestorage.app",
+    messagingSenderId: "522802064027",
+    appId: "1:522802064027:web:99d42ac27ac1327e87b43e"
+};
+```
+
+**Generate the complete code based on these specifications.**

@@ -1,0 +1,128 @@
+/* Loader Container - Full Screen Overlay */
+.loader-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000; /* Pure black background as requested for video-like feel */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+}
+
+.loader-container.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* BolAI Loader Content Wrapper */
+.bolai-loader-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+/* Text Container */
+.bolai-loader-text {
+    font-family: 'Poppins', sans-serif;
+    font-size: 6rem;
+    font-weight: 700;
+    color: #fff;
+    display: flex;
+    gap: 5px; /* Slight spacing between letters */
+}
+
+/* Individual Letters */
+.bolai-loader-text span {
+    opacity: 0;
+    display: inline-block;
+    animation: sequential-fade 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    /* text-transform: uppercase; Removed to respect case sensitivity */
+    position: relative;
+    
+    /* Neon Glow Effect */
+    text-shadow: 
+        0 0 5px rgba(255, 255, 255, 0.8),
+        0 0 10px rgba(0, 255, 255, 0.5),
+        0 0 20px rgba(0, 255, 255, 0.3);
+}
+
+/* Color customization for BOL (White) */
+.bolai-loader-text span:nth-child(1),
+.bolai-loader-text span:nth-child(2),
+.bolai-loader-text span:nth-child(3) {
+    --base-color: #ffffff;
+    --glow-color: rgba(255, 255, 255, 0.5);
+    text-shadow: 
+        0 0 5px rgba(255, 255, 255, 0.8),
+        0 0 10px rgba(255, 255, 255, 0.5),
+        0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+/* Color customization for AI (Blue) */
+.bolai-loader-text span:nth-child(4),
+.bolai-loader-text span:nth-child(5) {
+    --base-color: #64ffda;
+    --glow-color: rgba(100, 255, 218, 0.5);
+    text-shadow: 
+        0 0 5px rgba(100, 255, 218, 0.8),
+        0 0 10px rgba(100, 255, 218, 0.5),
+        0 0 20px rgba(100, 255, 218, 0.3);
+}
+
+/* Staggered Delays for "One by One" Effect */
+.bolai-loader-text span:nth-child(1) { animation-delay: 0.0s; }
+.bolai-loader-text span:nth-child(2) { animation-delay: 0.15s; }
+.bolai-loader-text span:nth-child(3) { animation-delay: 0.3s; }
+.bolai-loader-text span:nth-child(4) { animation-delay: 0.45s; }
+.bolai-loader-text span:nth-child(5) { animation-delay: 0.6s; }
+
+/* 
+   Animation Sequence:
+   0% - 20%: Fade In & Slide Up (Appear)
+   20% - 60%: Stay Visible (Hold)
+   60% - 80%: Fade Out & Slide Up (Disappear)
+   80% - 100%: Stay Hidden (Reset)
+*/
+@keyframes sequential-fade {
+    0% {
+        opacity: 0;
+        transform: translateY(20px) scale(0.9);
+        filter: blur(5px);
+    }
+    15% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+        color: var(--base-color);
+    }
+    55% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+        color: var(--base-color);
+    }
+    70% {
+        opacity: 0;
+        transform: translateY(-20px) scale(1.1);
+        filter: blur(5px);
+        color: var(--base-color); /* Maintain base color as it disappears */
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+}
+
+/* Optional: Mobile Responsiveness */
+@media (max-width: 768px) {
+    .bolai-loader-text {
+        font-size: 4rem;
+    }
+}

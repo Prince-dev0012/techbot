@@ -1,0 +1,597 @@
+:root {
+    --bg-dark: #050b14;
+    --bg-navy: #0a192f;
+    --bg-deep-blue: #112240;
+    --card-bg: rgba(17, 34, 64, 0.85);
+    --primary-accent: #3b82f6;
+    --primary-hover: #2563eb;
+    --text-main: #ccd6f6;
+    --text-muted: #8892b0;
+    --input-bg: #0a192f;
+    --border-color: #233554;
+    --white: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    /* Dark gradient background */
+    background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-navy) 50%, var(--bg-deep-blue) 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    color: var(--text-main);
+}
+
+/* Centered login card with backdrop blur for futuristic look */
+.login-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    width: 100%;
+    max-width: 380px; /* Reduced from 420px */
+    padding: 30px;    /* Reduced from 40px */
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 
+                0 0 20px rgba(59, 130, 246, 0.05);
+    transition: all 0.3s ease;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.header h1 {
+    color: var(--white);
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+}
+
+.header p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    font-weight: 300;
+}
+
+.form-group {
+    margin-bottom: 22px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 14px 16px;
+    background: var(--input-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    font-size: 0.95rem;
+    color: var(--text-main);
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.form-group input::placeholder {
+    color: #495670;
+}
+
+.form-group input:focus {
+    border-color: var(--primary-accent);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+/* Primary Login Button */
+.btn-login {
+    width: 100%;
+    background: var(--primary-accent);
+    color: var(--white);
+    border: none;
+    padding: 14px;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+.btn-login:hover {
+    background: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
+}
+
+.btn-login:active {
+    transform: translateY(0);
+}
+
+/* Divider */
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 25px 0;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.divider:not(:empty)::before { margin-right: 15px; }
+.divider:not(:empty)::after { margin-left: 15px; }
+
+/* Google Button */
+.btn-google {
+    width: 100%;
+    background: transparent;
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+    padding: 14px;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-google:hover {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: var(--text-muted);
+}
+
+.btn-google svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Footer Link */
+.signup-link {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.signup-link a {
+    color: var(--primary-accent);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    cursor: pointer;
+}
+
+.signup-link a:hover {
+    color: #60a5fa; /* Lighter blue on hover */
+    text-decoration: underline;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Chatbot Container */
+.chatbot-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-navy);
+}
+
+.chatbot-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: rgba(17, 34, 64, 0.95);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.chatbot-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.message {
+    max-width: 80%;
+    padding: 12px 16px;
+    border-radius: 12px;
+    line-height: 1.5;
+    font-size: 0.95rem;
+}
+
+.message.bot {
+    background: var(--card-bg);
+    color: var(--text-main);
+    align-self: flex-start;
+    border-top-left-radius: 2px;
+}
+
+.message.user {
+    background: var(--primary-accent);
+    color: var(--bg-navy);
+    align-self: flex-end;
+    border-top-right-radius: 2px;
+    font-weight: 500;
+}
+
+.chatbot-input {
+    padding: 20px;
+    background: rgba(17, 34, 64, 0.95);
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    gap: 10px;
+}
+
+.btn-logout {
+    background: transparent;
+    border: 1px solid var(--primary-accent);
+    color: var(--primary-accent);
+    padding: 6px 15px;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-logout:hover {
+    background: rgba(100, 255, 218, 0.1);
+}
+
+#error-message {
+    color: #ef4444;
+    text-align: center;
+    margin-top: 10px;
+    font-size: 0.9rem;
+    min-height: 20px;
+}
+
+/* Mobile Responsiveness for Login/Signup */
+@media (max-width: 480px) {
+    .auth-wrapper {
+        flex-direction: column;
+        padding: 20px 0;
+    }
+    
+    .auth-left {
+        text-align: center;
+        padding-right: 0;
+        margin-bottom: 30px;
+    }
+    
+    .login-card {
+        max-width: 90%;
+        padding: 25px;
+        margin: 0 20px;
+    }
+
+    .logo-display-large .logo-bol, .logo-display-large .logo-ai {
+        font-size: 3rem !important;
+    }
+
+    .header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .form-group input {
+        padding: 12px 14px; /* Slightly smaller padding */
+    }
+}
+
+/* Auth Wrapper Layout - Split Screen (3 Columns) */
+.auth-wrapper {
+    display: flex;
+    width: 100%;
+    max-width: 1400px; /* Increased width to accommodate 3 columns */
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    padding: 20px;
+}
+
+.auth-wrapper.hidden {
+    display: none !important;
+}
+
+/* Left Panel: Logo */
+.auth-left-logo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; /* Center align within the column */
+    text-align: center;
+    min-width: 250px;
+}
+
+/* Center Panel: Forms */
+.auth-center-form {
+    flex: 1; /* Allow to grow/shrink but maintain priority */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 380px;
+    max-width: 450px;
+}
+
+/* Right Panel: Chat Animation */
+.auth-right-panel {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px;
+    min-width: 350px;
+}
+
+.auth-brand {
+    /* Removed specific container class usage as content is now direct child */
+    text-align: center;
+}
+
+.logo-display-small .logo-bol {
+    font-size: 3rem; /* Slightly larger for standalone column */
+    font-weight: 700;
+    color: #fff;
+    line-height: 1;
+}
+
+.logo-display-small .logo-ai {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #64ffda;
+    line-height: 1;
+}
+
+.brand-tagline-small {
+    color: var(--text-muted);
+    font-size: 1rem;
+    font-weight: 300;
+    margin-top: 10px;
+    max-width: 250px; /* Constrain width for better text wrap */
+}
+
+/* Adjusted Login Card Dimensions */
+.login-card {
+    width: 100%;
+    /* max-width controlled by container */
+    padding: 30px;
+    margin: 0;
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* Password Toggle Styling */
+.password-wrapper {
+    position: relative;
+    width: 100%;
+    z-index: 1; /* Ensure wrapper has context */
+}
+
+.password-toggle {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s ease;
+    padding: 8px; /* Increased hit area padding */
+    user-select: none; /* Prevent selection when pressing and holding */
+    -webkit-user-select: none;
+    z-index: 10; /* Ensure icon is clickable */
+}
+
+.password-toggle:hover, .password-toggle:active {
+    color: var(--primary-accent);
+}
+
+/* Ensure input has space for the icon */
+.form-group input[type="password"],
+.form-group input[type="text"] { /* Applies when toggled to text */
+    padding-right: 45px; 
+}
+
+/* Chat Animation Container */
+.chat-animation-container {
+    width: 100%;
+    max-width: 100%; /* Fill the column */
+}
+
+
+.computer-mockup {
+    background: var(--bg-navy);
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.6), 
+                0 0 30px rgba(100, 255, 218, 0.1); /* Subtle glow */
+    overflow: hidden;
+    transform: rotateY(-5deg) rotateX(5deg);
+    transition: all 0.5s ease;
+    animation: float 6s ease-in-out infinite;
+}
+
+.computer-mockup:hover {
+    transform: rotateY(0) rotateX(0) scale(1.02);
+    box-shadow: 0 40px 70px -12px rgba(0, 0, 0, 0.7),
+                0 0 40px rgba(100, 255, 218, 0.2);
+}
+
+.mockup-header {
+    background: rgba(10, 25, 47, 0.95);
+    padding: 12px 18px;
+    display: flex;
+    gap: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.dot.red { background: #ff5f56; }
+.dot.yellow { background: #ffbd2e; }
+.dot.green { background: #27c93f; }
+
+.mockup-screen {
+    padding: 25px;
+    height: 400px;
+    background: rgba(17, 34, 64, 0.6);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    font-family: 'Poppins', sans-serif;
+    position: relative;
+}
+
+/* Scanlines effect */
+.mockup-screen::before {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%);
+    background-size: 100% 4px;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.mockup-message {
+    padding: 12px 18px;
+    border-radius: 14px;
+    font-size: 0.9rem;
+    max-width: 85%;
+    opacity: 0;
+    animation: slideIn 0.5s forwards cubic-bezier(0.2, 0.8, 0.2, 1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+}
+
+.mockup-message p {
+    margin: 0;
+    line-height: 1.5;
+}
+
+.mockup-message.user {
+    background: var(--primary-accent);
+    color: white;
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+    transform-origin: bottom right;
+}
+
+.mockup-message.bot {
+    background: var(--bg-deep-blue);
+    color: var(--text-main);
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+    border: 1px solid var(--border-color);
+    transform-origin: bottom left;
+    animation-delay: 1.2s;
+}
+
+.mockup-message.delay-1 { animation-delay: 3.5s; }
+.mockup-message.delay-2 { animation-delay: 5s; }
+
+.typing-indicator {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    height: 20px;
+}
+
+.typing-indicator span {
+    display: block;
+    width: 6px;
+    height: 6px;
+    background: var(--text-muted);
+    border-radius: 50%;
+    animation: typing 1.4s infinite both;
+}
+
+.typing-indicator span:nth-child(1) { animation-delay: 0s; }
+.typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+.typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(20px) scale(0.9); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotateY(-5deg) rotateX(5deg); }
+    50% { transform: translateY(-15px) rotateY(-5deg) rotateX(5deg); }
+}
+
+@keyframes typing {
+    0%, 100% { opacity: 0.3; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* Mobile Responsiveness for Auth Layout */
+@media (max-width: 960px) {
+    .auth-wrapper {
+        flex-direction: column;
+        gap: 40px;
+        padding: 40px 20px;
+    }
+    
+    .auth-right-panel {
+        width: 100%;
+        max-width: 450px;
+        order: -1; /* Animation on top on mobile? Or bottom? Let's keep default (bottom) or hide */
+        display: none; /* Often better to hide complex animations on mobile auth screens to focus on login */
+    }
+
+    .auth-left-panel {
+        max-width: 100%;
+    }
+
+    .login-card {
+        max-width: 100%;
+    }
+}

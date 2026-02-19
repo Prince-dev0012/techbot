@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BolAI | Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="loader.css">
+</head>
+<body>
+
+    <!-- Loader Container -->
+    <div id="loader" class="loader-container hidden">
+        <div class="bolai-loader-content">
+            <div class="bolai-loader-text">
+                <span>B</span>
+                <span>o</span>
+                <span>l</span>
+                <span>A</span>
+                <span>I</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Auth Wrapper -->
+    <div id="auth-wrapper" class="auth-wrapper">
+        <a href="../index.html" style="position: absolute; top: 20px; left: 20px; color: var(--text-color); text-decoration: none; display: flex; align-items: center; gap: 5px; z-index: 10;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            Back to Home
+        </a>
+        <!-- Left Side: Brand/Logo -->
+        <div class="auth-left-logo">
+            <div class="logo-display-small">
+                <span class="logo-bol">Bol</span><span class="logo-ai">AI</span>
+            </div>
+            <p class="brand-tagline-small">Your intelligent conversation partner</p>
+        </div>
+
+        <!-- Center: Forms -->
+        <div class="auth-center-form">
+            <!-- Login Card -->
+            <div id="login-card" class="login-card">
+                <div class="header">
+                    <h1>Welcome Back</h1>
+                    <p>Log in to access BolAI</p>
+                </div>
+
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="login-email">Email Address</label>
+                        <input type="email" id="login-email" placeholder="john@example.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <div class="password-wrapper">
+                            <input type="password" id="login-password" placeholder="••••••••" required>
+                            <span class="password-toggle">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                            </span>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-login">Log In</button>
+                </form>
+
+                <div id="login-error" style="color: #ef4444; text-align: center; margin-top: 10px;"></div>
+
+                <div class="divider">OR</div>
+
+                <button class="btn-google" id="google-login-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+                        <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+                        <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+                        <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+                        <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+                    </svg>
+                    Continue with Google
+                </button>
+
+                <div class="signup-link">
+                    <a href="#" id="show-forgot-password">Forgot Password?</a>
+                </div>
+                <div class="signup-link">
+                    Don't have an account? <a href="#" id="show-signup">Sign up</a>
+                </div>
+            </div>
+
+            <!-- Signup Card -->
+            <div id="signup-card" class="login-card hidden">
+                <div class="header">
+                    <h1>Create Account</h1>
+                    <p>Sign up to get started with BolAI</p>
+                </div>
+
+                <form id="signup-form">
+                    <div class="form-group">
+                        <label for="signup-email">Email Address</label>
+                        <input type="email" id="signup-email" placeholder="john@example.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="signup-password">Password</label>
+                        <div class="password-wrapper">
+                            <input type="password" id="signup-password" placeholder="••••••••" required>
+                            <span class="password-toggle">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="signup-confirm-password">Confirm Password</label>
+                        <div class="password-wrapper">
+                            <input type="password" id="signup-confirm-password" placeholder="••••••••" required>
+                            <span class="password-toggle">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                            </span>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-login">Sign Up</button>
+                </form>
+                
+                <div id="signup-error" style="color: #ef4444; text-align: center; margin-top: 10px;"></div>
+
+                <div class="divider">OR</div>
+
+                <button class="btn-google" id="google-signup-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+                        <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+                        <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+                        <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+                        <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+                    </svg>
+                    Sign up with Google
+                </button>
+
+                <div class="signup-link">
+                    Already have an account? <a href="#" id="show-login">Log in</a>
+                </div>
+            </div>
+
+            <!-- Forgot Password Card -->
+            <div id="forgot-password-card" class="login-card hidden">
+                <div class="header">
+                    <h1>Reset Password</h1>
+                    <p>Enter your email to receive a reset link</p>
+                </div>
+
+                <form id="forgot-password-form">
+                    <div class="form-group">
+                        <label for="reset-email">Email Address</label>
+                        <input type="email" id="reset-email" placeholder="john@example.com" required>
+                    </div>
+
+                    <button type="submit" class="btn-login">Send Reset Link</button>
+                </form>
+
+                <div id="reset-message" style="color: #34d399; text-align: center; margin-top: 10px;"></div>
+                <div id="reset-error" style="color: #ef4444; text-align: center; margin-top: 10px;"></div>
+
+                <div class="signup-link">
+                    Remembered? <a href="#" id="back-to-login">Log in</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side: Animation -->
+        <div class="auth-right-panel">
+            <div class="chat-animation-container">
+                <div class="computer-mockup">
+                    <div class="mockup-header">
+                        <div class="dot red"></div>
+                        <div class="dot yellow"></div>
+                        <div class="dot green"></div>
+                    </div>
+                    <div class="mockup-screen">
+                        <div class="mockup-message user">
+                            <p>How does AI work?</p>
+                        </div>
+                        <div class="mockup-message bot">
+                            <p>AI processes data to simulate human intelligence...</p>
+                        </div>
+                        <div class="mockup-message user delay-1">
+                            <p>Can you help me code?</p>
+                        </div>
+                        <div class="mockup-message bot delay-2">
+                            <div class="typing-indicator">
+                                <span></span><span></span><span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>
